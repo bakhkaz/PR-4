@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c5119739cdf041efb0abc290ecefa970" Name="Diagram1">
+        <EntityTypeShape EntityType="AAAJurnalDBModel.Assessment" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AAAJurnalDBModel.Cours" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AAAJurnalDBModel.Jurnal" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AAAJurnalDBModel.People" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AAAJurnalDBModel.Predmet" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AAAJurnalDBModel.Student" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AAAJurnalDBModel.StudentGroup" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="AAAJurnalDBModel.FK__Jurnal__Assessme__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="AAAJurnalDBModel.FK__Student__Cours__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="AAAJurnalDBModel.FK__Jurnal__Predmet__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="AAAJurnalDBModel.FK__Jurnal__Student__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="AAAJurnalDBModel.FK__Student__People__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="AAAJurnalDBModel.FK__Student__TitleGr__32E0915F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

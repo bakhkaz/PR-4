@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AAAJurnalDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Assessment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Assessment" Type="int" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUMBER" Type="int" />
+        </EntityType>
+        <EntityType Name="Jurnal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Student" Type="int" />
+          <Property Name="Predmet" Type="int" />
+          <Property Name="Assessment" Type="int" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="FirsnName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="MidName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Predmet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="People" Type="int" />
+          <Property Name="TitleGroup" Type="int" />
+          <Property Name="Cours" Type="int" />
+        </EntityType>
+        <EntityType Name="StudentGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__Jurnal__Assessme__30F848ED">
+          <End Role="Assessment" Type="Self.Assessment" Multiplicity="0..1" />
+          <End Role="Jurnal" Type="Self.Jurnal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assessment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jurnal">
+              <PropertyRef Name="Assessment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Jurnal__Predmet__300424B4">
+          <End Role="Predmet" Type="Self.Predmet" Multiplicity="0..1" />
+          <End Role="Jurnal" Type="Self.Jurnal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predmet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jurnal">
+              <PropertyRef Name="Predmet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Jurnal__Student__2F10007B">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Jurnal" Type="Self.Jurnal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jurnal">
+              <PropertyRef Name="Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Cours__33D4B598">
+          <End Role="Cours" Type="Self.Cours" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Cours" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__People__31EC6D26">
+          <End Role="People" Type="Self.People" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="People" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__TitleGr__32E0915F">
+          <End Role="StudentGroup" Type="Self.StudentGroup" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="TitleGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AAAJurnalDBModelContainer">
+          <EntitySet Name="Assessment" EntityType="Self.Assessment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cours" EntityType="Self.Cours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jurnal" EntityType="Self.Jurnal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Predmet" EntityType="Self.Predmet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentGroup" EntityType="Self.StudentGroup" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Jurnal__Assessme__30F848ED" Association="Self.FK__Jurnal__Assessme__30F848ED">
+            <End Role="Assessment" EntitySet="Assessment" />
+            <End Role="Jurnal" EntitySet="Jurnal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Jurnal__Predmet__300424B4" Association="Self.FK__Jurnal__Predmet__300424B4">
+            <End Role="Predmet" EntitySet="Predmet" />
+            <End Role="Jurnal" EntitySet="Jurnal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Jurnal__Student__2F10007B" Association="Self.FK__Jurnal__Student__2F10007B">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Jurnal" EntitySet="Jurnal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Cours__33D4B598" Association="Self.FK__Student__Cours__33D4B598">
+            <End Role="Cours" EntitySet="Cours" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__People__31EC6D26" Association="Self.FK__Student__People__31EC6D26">
+            <End Role="People" EntitySet="People" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__TitleGr__32E0915F" Association="Self.FK__Student__TitleGr__32E0915F">
+            <End Role="StudentGroup" EntitySet="StudentGroup" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AAAJurnalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Assessment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Assessment1" Type="Int32" />
+          <NavigationProperty Name="Jurnal" Relationship="Self.FK__Jurnal__Assessme__30F848ED" FromRole="Assessment" ToRole="Jurnal" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUMBER" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Student__Cours__33D4B598" FromRole="Cours" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Jurnal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Student" Type="Int32" />
+          <Property Name="Predmet" Type="Int32" />
+          <Property Name="Assessment" Type="Int32" />
+          <NavigationProperty Name="Assessment1" Relationship="Self.FK__Jurnal__Assessme__30F848ED" FromRole="Jurnal" ToRole="Assessment" />
+          <NavigationProperty Name="Predmet1" Relationship="Self.FK__Jurnal__Predmet__300424B4" FromRole="Jurnal" ToRole="Predmet" />
+          <NavigationProperty Name="Student1" Relationship="Self.FK__Jurnal__Student__2F10007B" FromRole="Jurnal" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirsnName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MidName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Student__People__31EC6D26" FromRole="People" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Predmet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Jurnal" Relationship="Self.FK__Jurnal__Predmet__300424B4" FromRole="Predmet" ToRole="Jurnal" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="People" Type="Int32" />
+          <Property Name="TitleGroup" Type="Int32" />
+          <Property Name="Cours" Type="Int32" />
+          <NavigationProperty Name="Cours1" Relationship="Self.FK__Student__Cours__33D4B598" FromRole="Student" ToRole="Cours" />
+          <NavigationProperty Name="Jurnal" Relationship="Self.FK__Jurnal__Student__2F10007B" FromRole="Student" ToRole="Jurnal" />
+          <NavigationProperty Name="People1" Relationship="Self.FK__Student__People__31EC6D26" FromRole="Student" ToRole="People" />
+          <NavigationProperty Name="StudentGroup" Relationship="Self.FK__Student__TitleGr__32E0915F" FromRole="Student" ToRole="StudentGroup" />
+        </EntityType>
+        <EntityType Name="StudentGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Student__TitleGr__32E0915F" FromRole="StudentGroup" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Jurnal__Assessme__30F848ED">
+          <End Role="Assessment" Type="Self.Assessment" Multiplicity="0..1" />
+          <End Role="Jurnal" Type="Self.Jurnal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assessment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jurnal">
+              <PropertyRef Name="Assessment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Cours__33D4B598">
+          <End Role="Cours" Type="Self.Cours" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Cours" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Jurnal__Predmet__300424B4">
+          <End Role="Predmet" Type="Self.Predmet" Multiplicity="0..1" />
+          <End Role="Jurnal" Type="Self.Jurnal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predmet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jurnal">
+              <PropertyRef Name="Predmet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Jurnal__Student__2F10007B">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Jurnal" Type="Self.Jurnal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jurnal">
+              <PropertyRef Name="Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__People__31EC6D26">
+          <End Role="People" Type="Self.People" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="People" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__TitleGr__32E0915F">
+          <End Role="StudentGroup" Type="Self.StudentGroup" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="TitleGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AAAJurnalDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Assessment" EntityType="Self.Assessment" />
+          <EntitySet Name="Cours" EntityType="Self.Cours" />
+          <EntitySet Name="Jurnal" EntityType="Self.Jurnal" />
+          <EntitySet Name="People" EntityType="Self.People" />
+          <EntitySet Name="Predmet" EntityType="Self.Predmet" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="StudentGroup" EntityType="Self.StudentGroup" />
+          <AssociationSet Name="FK__Jurnal__Assessme__30F848ED" Association="Self.FK__Jurnal__Assessme__30F848ED">
+            <End Role="Assessment" EntitySet="Assessment" />
+            <End Role="Jurnal" EntitySet="Jurnal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Cours__33D4B598" Association="Self.FK__Student__Cours__33D4B598">
+            <End Role="Cours" EntitySet="Cours" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Jurnal__Predmet__300424B4" Association="Self.FK__Jurnal__Predmet__300424B4">
+            <End Role="Predmet" EntitySet="Predmet" />
+            <End Role="Jurnal" EntitySet="Jurnal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Jurnal__Student__2F10007B" Association="Self.FK__Jurnal__Student__2F10007B">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Jurnal" EntitySet="Jurnal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__People__31EC6D26" Association="Self.FK__Student__People__31EC6D26">
+            <End Role="People" EntitySet="People" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__TitleGr__32E0915F" Association="Self.FK__Student__TitleGr__32E0915F">
+            <End Role="StudentGroup" EntitySet="StudentGroup" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AAAJurnalDBModelContainer" CdmEntityContainer="AAAJurnalDBEntities2">
+          <EntitySetMapping Name="Assessment">
+            <EntityTypeMapping TypeName="AAAJurnalDBModel.Assessment">
+              <MappingFragment StoreEntitySet="Assessment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Assessment1" ColumnName="Assessment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cours">
+            <EntityTypeMapping TypeName="AAAJurnalDBModel.Cours">
+              <MappingFragment StoreEntitySet="Cours">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NUMBER" ColumnName="NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jurnal">
+            <EntityTypeMapping TypeName="AAAJurnalDBModel.Jurnal">
+              <MappingFragment StoreEntitySet="Jurnal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Student" ColumnName="Student" />
+                <ScalarProperty Name="Predmet" ColumnName="Predmet" />
+                <ScalarProperty Name="Assessment" ColumnName="Assessment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="AAAJurnalDBModel.People">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="FirsnName" ColumnName="FirsnName" />
+                <ScalarProperty Name="MidName" ColumnName="MidName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Predmet">
+            <EntityTypeMapping TypeName="AAAJurnalDBModel.Predmet">
+              <MappingFragment StoreEntitySet="Predmet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="AAAJurnalDBModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="People" ColumnName="People" />
+                <ScalarProperty Name="TitleGroup" ColumnName="TitleGroup" />
+                <ScalarProperty Name="Cours" ColumnName="Cours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentGroup">
+            <EntityTypeMapping TypeName="AAAJurnalDBModel.StudentGroup">
+              <MappingFragment StoreEntitySet="StudentGroup">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
